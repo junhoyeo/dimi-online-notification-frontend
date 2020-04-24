@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+}
+
+* {
+  color: rgba(0, 0, 0, 0.75);
+  font-family: 'Gothic A1', sans-serif;
+  line-height: 1.4;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+a {
+  color: unset;
+  text-decoration: none;
+  transition: all 0.2s ease-in;
+}
+
+a:hover,
+a:focus {
+  color: rgba(18, 125, 255);
+  text-shadow: 
+    #fff -3px -3px 16px,
+    rgba(18, 125, 255) 3px 3px 24px;
+}
+
+button,
+input {
+  border: none;
+}
+
+button:focus,
+input:focus {
+  outline: none;
+}
+
+.page {
+  background-color: #f4f4f8;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.illust {
+  width: 454px;
+}
+
+.title {
+  margin: 0;
+  margin-top: 30px;
+  font-size: 1.65rem;
+  color: #2d8cff;
+  text-shadow: 
+    #fff -3px -3px 16px,
+    rgba(18, 125, 255, 0.8) 3px 3px 24px;
+}
+
+.paragraph {
+  margin: 0;
+  font-size: 1.1rem;
+  margin-bottom: 22px;
+  text-shadow: 
+    #fff -3px -3px 10px,
+    rgba(0, 0, 0, 0.45) 3px 3px 12px;
+}
+
+.button {
+  color: white;
+  border-radius: 45px;
+  padding: 20px;
+  width: 200px;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  cursor: pointer;
+  background-color: #2d8cff;
+  box-shadow: rgba(18, 125, 255, 0.5) 0px 3px 16px;
+  transition: all 0.2s ease-in;
+  text-shadow: rgba(18, 125, 255, 0.5) 0px 3px 16px;
+}
+
+.button:hover,
+.button:focus {
+  background-color: rgba(18, 125, 255);
+}
