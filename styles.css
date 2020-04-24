@@ -92,3 +92,23 @@ input:focus {
 .button:focus {
   background-color: rgba(18, 125, 255);
 }
+
+@media screen and (max-width: 568px) {
+  .illust {
+    width: 80%;
+  }
+
+  .title {
+    font-size: 1.35rem;
+    margin-top: 20px;
+  }
+
+  .button,
+  .paragraph {
+    font-size: 0.85rem;
+  }
+
+  .button {
+    padding: 15px;
+  }
+}
