@@ -4,7 +4,9 @@ const initializeFirebase = async () => {
       .register('/firebase-messaging-sw.js')
       .then((registration) => {
         console.log(firebaseConfig);
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
 
         const messaging = firebase.messaging();
         messaging
