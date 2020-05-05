@@ -7,13 +7,19 @@ const messaging = firebase.messaging();
 
 const notify = async () => {
   messaging
-  .requestPermission()
-  .then(() => messaging.getToken())
-  .then(async (token) => {
-    console.log(token);
-    // await fetch('/register', { method: 'post', body: token });
-  })
-  .catch((err) => console.log(err));
+    .requestPermission()
+    .then(() => messaging.getToken())
+    .then(async (token) => {
+      console.log(token);
+      // await fetch('/register', { method: 'post', body: token });
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/firebase-messaging-sw.js')
+          .then((registration) => console.log(registration));
+      }
+    })
+    .catch((err) => console.log(err));
 
   messaging.onMessage(({ data: { notification } }) => {
     const { title, body }  = (() => {
@@ -22,8 +28,12 @@ const notify = async () => {
       }
       return notification;
     })();
-    return self.registration.showNotification(title, {
-      body,
-    });
+
+    return navigator.serviceWorker.ready
+      .then((registration) => {
+        registration.showNotification(title, {
+          body,
+        });
+      });
   });
 };
