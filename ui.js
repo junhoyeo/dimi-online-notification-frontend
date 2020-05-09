@@ -24,7 +24,7 @@ class ApplicationUI {
   _onClickButton() {
     const { currentClassroom } = this.state;
     if (!currentClassroom) {
-      alert('잠깐! 먼저 알람을 받을 학년과 반을 선택해 주세요! ✋');
+      toast('잠깐! 먼저 알람을 받을 학년과 반을 선택해 주세요! ✋');
       return;
     };
     notify(currentClassroom);

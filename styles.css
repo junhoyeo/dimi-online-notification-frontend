@@ -122,6 +122,14 @@ input:focus {
   text-shadow: rgba(18, 125, 255, 0.5) 0px 3px 16px;
 }
 
+.toast {
+  min-width: 300px;
+  box-shadow: rgba(13, 12, 61, 0.15) 4px 4px 22px !important;
+  color: rgba(13, 12, 61, 0.8) !important;
+  border-radius: 20px !important;
+  word-break: keep-all;
+}
+
 .button:hover,
 .button:focus {
   background-color: rgba(18, 125, 255);
@@ -144,5 +152,9 @@ input:focus {
 
   .button {
     padding: 15px;
+  }
+
+  .toast {
+    min-width: 72%;
   }
 }

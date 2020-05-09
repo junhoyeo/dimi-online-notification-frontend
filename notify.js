@@ -18,7 +18,7 @@ const notify = async (topic) => {
           .register('/firebase-messaging-sw.js')
           .then((registration) => {
             console.log(registration);
-            window.alert('구독 완료! 🙌');
+            toast('구독 완료! 🙌');
           });
       }
     })
