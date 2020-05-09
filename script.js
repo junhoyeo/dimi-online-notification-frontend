@@ -16,7 +16,10 @@ const notify = async () => {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
           .register('/firebase-messaging-sw.js')
-          .then((registration) => console.log(registration));
+          .then((registration) => {
+            console.log(registration);
+            window.alert('구독 완료! 🙌');
+          });
       }
     })
     .catch((err) => console.log(err));
