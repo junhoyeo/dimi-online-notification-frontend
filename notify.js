@@ -4,13 +4,13 @@ if (!firebase.apps.length) {
 
 const messaging = firebase.messaging();
 
-const notify = async () => {
+const notify = async (topic) => {
   messaging
     .requestPermission()
     .then(() => messaging.getToken())
     .then(async (token) => {
       console.log(token);
-      const { data } = await axios.post(`http://localhost:3128/topicsub/13/${token}`);
+      const { data } = await axios.post(`https://beaver.hanukoon.com/topicsub/${topic}/${token}`);
       console.log(data);
 
       if ('serviceWorker' in navigator) {

@@ -57,7 +57,7 @@ input:focus {
   margin-top: 30px;
   font-size: 1.65rem;
   color: #2d8cff;
-  text-shadow: 
+  text-shadow:
     #fff -3px -3px 16px,
     rgba(18, 125, 255, 0.8) 3px 3px 24px;
 }
@@ -65,10 +65,44 @@ input:focus {
 .paragraph {
   margin: 0;
   font-size: 1.1rem;
-  margin-bottom: 22px;
-  text-shadow: 
+  margin-bottom: 20px;
+  text-shadow:
     #fff -3px -3px 10px,
     rgba(0, 0, 0, 0.45) 3px 3px 12px;
+}
+
+.selector-wrapper {
+  border-radius: 45px;
+  padding: 20px;
+  background-color: #dee6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12rem;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow:
+    rgba(255, 255, 255, 0.25) -4px -4px 15px,
+    rgba(74, 156, 255, 0.35) 0px 4px 18px;
+}
+
+.selector {
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: transparent;
+  width: 10rem;
+  margin-left: -8px;
+  border-width: 0px;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+  color: rgb(13, 12, 61);
+  cursor: pointer;
+}
+
+.selector:focus {
+  outline: 0;
 }
 
 .button {

@@ -19,7 +19,21 @@
         Zoom, 당겨 Zoom~
       </a>
       <p class="paragraph">매 수업 시간마다 알람을 편하게 받아보세요.</p>
-      <button class="button" onclick="notify()">
+      <div
+        id="selector-wrapper"
+        class="selector-wrapper"
+      >
+        <select
+          id="selector"
+          class="selector"
+        >
+          <option value="" disabled selected>학년, 반</option>
+        </select>
+      </div>
+      <button
+        id="button"
+        class="button"
+      >
         구독하기
       </button>
     </div>
@@ -29,7 +43,8 @@
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-messaging.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="./credentials.js"></script>
-  <script src="./script.js"></script>
+  <script src="./notify.js"></script>
+  <script src="./ui.js"></script>
 </body>
 </html>
 <script> </script>
