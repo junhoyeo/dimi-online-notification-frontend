@@ -12,15 +12,30 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging()
+console.log('ddd')
 
-messaging.setBackgroundMessageHandler(({ data: { notification } }) => {
-  const { title, body }  = (() => {
-    if (typeof notification === 'string') {
-      return JSON.parse(notification);
+messaging.setBackgroundMessageHandler((message) => {
+  const {
+    notification: { title, body },
+    data: { url },
+  } = (() => {
+    if (typeof message === 'string') {
+      return JSON.parse(message);
     }
-    return notification;
+    return message;
   })();
+  console.log(message);
+
 	return self.registration.showNotification(title, {
     body,
+    data: { url },
   });
+});
+
+self.addEventListener('notificationclick', (event) => {
+  console.log(event);
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow(event.notification.data.url),
+  );
 });
