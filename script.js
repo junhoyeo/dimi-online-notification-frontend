@@ -1,4 +1,3 @@
-console.log(firebaseConfig);
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
@@ -11,7 +10,8 @@ const notify = async () => {
     .then(() => messaging.getToken())
     .then(async (token) => {
       console.log(token);
-      // await fetch('/register', { method: 'post', body: token });
+      const { data } = await axios.post(`https://beaver.hanukoon.com/topicsub/13/${token}`);
+      console.log(data);
 
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
