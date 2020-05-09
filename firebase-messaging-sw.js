@@ -12,20 +12,9 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging()
-console.log('ddd')
+console.log('hello')
 
-messaging.setBackgroundMessageHandler((message) => {
-  const {
-    notification: { title, body },
-    data: { url },
-  } = (() => {
-    if (typeof message === 'string') {
-      return JSON.parse(message);
-    }
-    return message;
-  })();
-  console.log(message);
-
+messaging.setBackgroundMessageHandler(({ data: { title, body, url } }) => {
 	return self.registration.showNotification(title, {
     body,
     data: { url },
