@@ -34,7 +34,7 @@ class ApplicationUI {
   _isUnsupportedBroswer() {
     if (!firebase.messaging.isSupported()) {
       toast(`이 브라우저는 웹 알림을 지원하지 않아요! 😱<br />
-        현재는 크롬과 파이어폭스 데스크탑 앱과<br />
+        현재는 크롬과 파이어폭스 데스크탑 앱,<br />
         안드로이드 스마트폰만 지원하고 있어요.`, 6000);
       return true;
     }
