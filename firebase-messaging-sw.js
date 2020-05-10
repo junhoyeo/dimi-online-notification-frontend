@@ -18,6 +18,7 @@ messaging.setBackgroundMessageHandler(({ data: { title, body, url } }) => {
 	return self.registration.showNotification(title, {
     body,
     data: { url },
+    icon: 'https://raw.githubusercontent.com/junhoyeo/dimi-online-notification-frontend/master/assets/icon.jpg',
   });
 });
 

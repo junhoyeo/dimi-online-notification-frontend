@@ -47,6 +47,14 @@ class AuthManager {
     return data;
   }
 
+  async _getStudentClassroom(token) {
+    const { grade, klass, user_type } = await this._getStudentInformation(token);
+    if (user_type !== 'S') {
+      toast('디미고 학생만 사용할 수 있어요. 👅');
+    }
+    return `${grade}${klass}`;
+  }
+
   _onChangeText(event, field) {
     const value = event.target.value;
     this.setState({ [field]: value });
@@ -79,11 +87,7 @@ class AuthManager {
     }
     try {
       const { data: { token } } = await axios.post('https://dev-api.dimigo.in/auth/', { id, password });
-      const { grade, klass, user_type } = await this._getStudentInformation(token);
-      if (user_type !== 'S') {
-        toast('디미고 학생만 사용할 수 있어요. 👅');
-      }
-      const studentClassroom = `${grade}${klass}`;
+      const studentClassroom = await this._getStudentClassroom(token);
       setCookieForOneHour('token', token);
       this._onLogin(studentClassroom);
     } catch ({ response: { status } }) {
@@ -105,9 +109,12 @@ class AuthManager {
     this.loginButton = document.getElementById('login-button');
   }
 
-  beforeInitialize() {
-    if (getCookie('token')) {
+  async beforeInitialize() {
+    const token = getCookie('token');
+    if (token) {
       this._showServiceContainer();
+      const studentClassroom = await this._getStudentClassroom(token);
+      this.application.initializeService(studentClassroom);
     } else {
       this._showLoginContainer();
     }
