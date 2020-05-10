@@ -186,8 +186,16 @@ footer {
     padding: 15px;
   }
 
+  .input {
+    width: 92%;
+  }
+
   .toast {
     min-width: 72%;
+  }
+
+  footer {
+    font-size: 0.8rem;
   }
 }
 
