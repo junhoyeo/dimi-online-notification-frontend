@@ -38,7 +38,7 @@ class ApplicationUI {
         안드로이드 스마트폰만 지원하고 있어요.`, 6000);
       return true;
     }
-    return true;
+    return false;
   }
 
   _onChangeSelector(event) {

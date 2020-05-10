@@ -159,6 +159,21 @@ input:focus {
   }
 }
 
+@-moz-document url-prefix() {
+  .selector {
+    -webkit-appearance: none;
+  }
+
+  .toast {
+    width: max-content;
+  }
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
 _::-webkit-full-page-media, _:future, :root .selector {
   -webkit-appearance: none;
 }
