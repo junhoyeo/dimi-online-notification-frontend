@@ -37,20 +37,14 @@ class AuthManager {
     this._showElement(this.serviceContainer);
   }
 
-  referenceUIElements() {
-    this.loginContainer = document.getElementById('login-container');
-    this.serviceContainer = document.getElementById('service-container');
-
-    this.usernameInput = document.getElementById('username-input');
-    this.passwordInput = document.getElementById('password-input');
-    this.loginButton = document.getElementById('login-button');
-  }
-
-  beforeInitialize() {
-    this._showLoginContainer();
-    if (this.application._isUnsupportedBroswer()) {
-      return;
-    }
+  async _getStudentInformation(token) {
+    const { data } = await axios.get('https://dev-api.dimigo.in/user/jwt/', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return data;
   }
 
   _onChangeText(event, field) {
@@ -58,14 +52,18 @@ class AuthManager {
     this.setState({ [field]: value });
   }
 
-  async _getStudentInformation(token) {
-    const { data } = await axios.get('https://dev-api.dimigo.in/user/jwt/', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    return data;
+  _onKeydownUsername(event) {
+    const isEnterPressed = event.keyCode === 13;
+    if (isEnterPressed) {
+      this.passwordInput.focus();
+    }
+  }
+
+  _onKeydownPassword(event) {
+    const isEnterPressed = event.keyCode === 13;
+    if (isEnterPressed) {
+      this._onClickLoginButton();
+    }
   }
 
   async _onLogin(studentClassroom) {
@@ -90,10 +88,26 @@ class AuthManager {
     } catch ({ response: { status } }) {
       if (status === 404) {
         toast(`사용자를 찾을 수 없어요.<br />
-          입력한 정보를 확인해 주세요!! 👻`);
+        입력한 정보를 확인해 주세요!! 👻`);
       } else {
         toast('헉, 오류가 발생했어요. 🥵');
       }
+    }
+  }
+
+  referenceUIElements() {
+    this.loginContainer = document.getElementById('login-container');
+    this.serviceContainer = document.getElementById('service-container');
+
+    this.usernameInput = document.getElementById('username-input');
+    this.passwordInput = document.getElementById('password-input');
+    this.loginButton = document.getElementById('login-button');
+  }
+
+  beforeInitialize() {
+    this._showLoginContainer();
+    if (this.application._isUnsupportedBroswer()) {
+      return;
     }
   }
 
@@ -103,9 +117,19 @@ class AuthManager {
       (event) => this._onChangeText.apply(this, [event, 'username']),
     );
 
+    this.usernameInput.addEventListener(
+      'keydown',
+      (event) => this._onKeydownUsername.apply(this, [event]),
+    );
+
     this.passwordInput.addEventListener(
       'change',
       (event) => this._onChangeText.apply(this, [event, 'password']),
+    );
+
+    this.passwordInput.addEventListener(
+      'keydown',
+      (event) => this._onKeydownPassword.apply(this, [event]),
     );
 
     this.loginButton.addEventListener(
