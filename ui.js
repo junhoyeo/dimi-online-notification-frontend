@@ -41,22 +41,43 @@ class ApplicationUI {
     return false;
   }
 
+  _recordUserInteraction(category, action, value) {
+    const eventOptions = {
+      hitType: 'event',
+      eventCategory: category,
+      eventAction: action,
+    };
+
+    if (value) {
+      ga('send', {
+        ...eventOptions,
+        eventValue: Number(value),
+      });
+      return;
+    }
+    ga('send', eventOptions);
+  }
+
   _onChangeSelector(event) {
     const value = event.target.value;
     this.setState({ currentClassroom: value });
   };
 
   _onClickButton() {
+    this._recordUserInteraction('Subscribe', 'Click Subscribe button');
     if (this._isUnsupportedBroswer()) {
+      this._recordUserInteraction('Subscribe', 'Fail to Subscribe due to unsupported broswer');
       return;
     }
     const { currentClassroom, previousClassroom } = this.state;
 
     if (!currentClassroom) {
+      this._recordUserInteraction('Subscribe', 'Fail to Subscribe with no classroom selected');
       toast('잠깐! 먼저 알람을 받을 학급을 선택해 주세요! ✋');
       return;
     };
     if (currentClassroom === previousClassroom) {
+      this._recordUserInteraction('Subscribe', 'Fail to Subscribe with no changes', currentClassroom);
       toast('이미 설정되어 있는 학급이예요! 👍');
       return;
     }
@@ -64,7 +85,12 @@ class ApplicationUI {
     this._changeButtonInnerText();
     this. _saveCurrentData(currentClassroom);
     this.setState({ previousClassroom: currentClassroom });
-    notify(currentClassroom);
+    try {
+      notify(currentClassroom);
+      this._recordUserInteraction('Subscribe', 'Success', currentClassroom);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   _changeButtonInnerText() {
