@@ -2,7 +2,7 @@ class AuthManager {
   constructor(application) {
     this.application = application;
     this.state = {
-      email: '',
+      username: '',
       password: '',
     };
 
@@ -84,6 +84,7 @@ class AuthManager {
         toast('디미고 학생만 사용할 수 있어요. 👅');
       }
       const studentClassroom = `${grade}${klass}`;
+      setCookieForOneHour('token', token);
       this._onLogin(studentClassroom);
     } catch ({ response: { status } }) {
       if (status === 404) {
@@ -105,7 +106,11 @@ class AuthManager {
   }
 
   beforeInitialize() {
-    this._showLoginContainer();
+    if (getCookie('token')) {
+      this._showServiceContainer();
+    } else {
+      this._showLoginContainer();
+    }
     if (this.application._isUnsupportedBroswer()) {
       return;
     }
@@ -118,7 +123,7 @@ class AuthManager {
     );
 
     this.usernameInput.addEventListener(
-      'keydown',
+      'keyup',
       (event) => this._onKeydownUsername.apply(this, [event]),
     );
 
@@ -128,7 +133,7 @@ class AuthManager {
     );
 
     this.passwordInput.addEventListener(
-      'keydown',
+      'keyup',
       (event) => this._onKeydownPassword.apply(this, [event]),
     );
 
