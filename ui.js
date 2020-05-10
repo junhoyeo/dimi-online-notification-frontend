@@ -18,7 +18,7 @@ class ApplicationUI {
     };
   }
 
-  _loadPreviousData = () => {
+  _loadPreviousData() {
     const previousClassroom = localStorage.getItem('previousClassroom') || null;
     this.setState({
       currentClassroom: previousClassroom,
@@ -27,8 +27,18 @@ class ApplicationUI {
     return Boolean(previousClassroom);
   };
 
-  _saveCurrentData = (value) => {
+  _saveCurrentData(value) {
     localStorage.setItem('previousClassroom', value);
+  }
+
+  _isUnsupportedBroswer() {
+    if (!firebase.messaging.isSupported()) {
+      toast(`이 브라우저는 웹 알림을 지원하지 않아요! 😱<br />
+        현재는 크롬과 파이어폭스 데스크탑 앱과<br />
+        안드로이드 스마트폰만 지원하고 있어요.`, 6000);
+      return true;
+    }
+    return true;
   }
 
   _onChangeSelector(event) {
@@ -37,7 +47,11 @@ class ApplicationUI {
   };
 
   _onClickButton() {
+    if (this._isUnsupportedBroswer()) {
+      return;
+    }
     const { currentClassroom, previousClassroom } = this.state;
+
     if (!currentClassroom) {
       toast('잠깐! 먼저 알람을 받을 학급을 선택해 주세요! ✋');
       return;
@@ -57,12 +71,21 @@ class ApplicationUI {
     this.button.innerText = '변경하기';
   }
 
+  _addMultipleEventListener(eventTypes, element, listener) {
+    eventTypes.forEach((eventType) => {
+      element.addEventListener(eventType, listener);
+    });
+  }
+
   referenceUIElements() {
     this.selector = document.getElementById('selector');
     this.button = document.getElementById('button');
   }
 
   beforeInitialize() {
+    if (this._isUnsupportedBroswer()) {
+      return;
+    }
     if (this._loadPreviousData()) {
       this._changeButtonInnerText();
     }
@@ -92,8 +115,9 @@ class ApplicationUI {
   }
 
   initializeEventHandlers() {
-    this.selector.addEventListener(
-      'change',
+    this._addMultipleEventListener(
+      ['change', 'blur'],
+      this.selector,
       (event) => this._onChangeSelector.apply(this, [event]),
     );
 

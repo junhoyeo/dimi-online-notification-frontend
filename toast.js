@@ -1,7 +1,7 @@
-const toast = (text) => {
+const toast = (text, duration = 3000) => {
   const toastOptions = {
     text,
-    duration: 3000,
+    duration,
     className: 'toast',
     gravity: 'top',
     position: 'center',

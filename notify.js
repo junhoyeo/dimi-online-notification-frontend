@@ -1,9 +1,3 @@
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-
-const messaging = firebase.messaging();
-
 const notify = async (topic) => {
   messaging
     .requestPermission()
@@ -34,3 +28,9 @@ const notify = async (topic) => {
       });
   });
 };
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+const messaging = firebase.messaging();

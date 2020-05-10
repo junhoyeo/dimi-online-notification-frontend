@@ -158,3 +158,7 @@ input:focus {
     min-width: 72%;
   }
 }
+
+_::-webkit-full-page-media, _:future, :root .selector {
+  -webkit-appearance: none;
+}
