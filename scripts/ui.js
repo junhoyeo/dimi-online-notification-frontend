@@ -1,13 +1,12 @@
 class ApplicationUI {
-  constructor() {
+  constructor(authManager) {
+    this.authManager = authManager;
     this.state = {
+      isLoggedIn: false,
       currentClassroom: null,
       previousClassroom: null,
     };
     this.referenceUIElements();
-    this.beforeInitialize();
-    this.initializeSelectorOptions();
-    this.initializeEventHandlers();
   }
 
   setState(value) {
@@ -18,8 +17,9 @@ class ApplicationUI {
     };
   }
 
-  _loadPreviousData() {
-    const previousClassroom = localStorage.getItem('previousClassroom') || null;
+  _loadPreviousData(studentClassroom = null) {
+    const previousClassroom =
+      localStorage.getItem('previousClassroom') || studentClassroom;
     this.setState({
       currentClassroom: previousClassroom,
       previousClassroom,
@@ -105,14 +105,14 @@ class ApplicationUI {
 
   referenceUIElements() {
     this.selector = document.getElementById('selector');
-    this.button = document.getElementById('button');
+    this.button = document.getElementById('subscribe-button');
   }
 
-  beforeInitialize() {
-    if (this._isUnsupportedBroswer()) {
-      return;
-    }
-    if (this._loadPreviousData()) {
+  initializeService(studentClassroom) {
+    this.initializeSelectorOptions();
+    this.initializeEventHandlers();
+
+    if (this._loadPreviousData(studentClassroom)) {
       this._changeButtonInnerText();
     }
   }
@@ -154,4 +154,4 @@ class ApplicationUI {
   }
 }
 
-const app = new ApplicationUI();
+const application = new ApplicationUI();

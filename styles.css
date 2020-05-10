@@ -71,6 +71,7 @@ input:focus {
     rgba(0, 0, 0, 0.45) 3px 3px 12px;
 }
 
+.input-wrapper,
 .selector-wrapper {
   border-radius: 45px;
   padding: 20px;
@@ -78,7 +79,6 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 12rem;
   position: relative;
   cursor: pointer;
   margin-bottom: 20px;
@@ -87,12 +87,12 @@ input:focus {
     rgba(74, 156, 255, 0.35) 0px 4px 18px;
 }
 
+.input,
 .selector {
+  box-sizing: border-box;
   font-size: 1.1rem;
   font-weight: bold;
   background-color: transparent;
-  width: 10rem;
-  margin-left: -8px;
   border-width: 0px;
   border-style: initial;
   border-color: initial;
@@ -101,8 +101,22 @@ input:focus {
   cursor: pointer;
 }
 
+.input:focus,
 .selector:focus {
   outline: 0;
+}
+
+.input {
+  width: 22rem;
+}
+
+.input#password-input {
+  -webkit-text-security: disc;
+}
+
+.selector {
+  width: 10rem;
+  margin-left: -8px;
 }
 
 .button {
@@ -133,6 +147,18 @@ input:focus {
 .button:hover,
 .button:focus {
   background-color: rgba(18, 125, 255);
+}
+
+#login-container {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#service-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (max-width: 568px) {

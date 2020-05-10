@@ -29,23 +29,47 @@
         Zoom, 당겨 Zoom~
       </a>
       <p class="paragraph">매 수업 시간마다 알람을 편하게 받아보세요.</p>
-      <div
-        id="selector-wrapper"
-        class="selector-wrapper"
-      >
-        <select
-          id="selector"
-          class="selector"
+      <div id="login-container">
+        <div class="input-wrapper">
+          <input
+            id="username-input"
+            class="input"
+            placeholder="디미고 계정 사용자 이름"
+            autocomplete="nope"
+            autofocus
+          />
+        </div>
+        <div class="input-wrapper">
+          <input
+            id="password-input"
+            class="input"
+            placeholder="디미고 계정 패스워드"
+            autocomplete="nope"
+          />
+        </div>
+        <button
+          id="login-button"
+          class="button"
         >
-          <option value="" disabled selected>학년, 반</option>
-        </select>
+          로그인
+        </button>
       </div>
-      <button
-        id="button"
-        class="button"
-      >
-        구독하기
-      </button>
+      <div id="service-container">
+        <div class="selector-wrapper">
+          <select
+            id="selector"
+            class="selector"
+          >
+            <option value="" disabled selected>학년, 반</option>
+          </select>
+        </div>
+        <button
+          id="subscribe-button"
+          class="button"
+        >
+          구독하기
+        </button>
+      </div>
     </div>
   </div>
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
@@ -53,10 +77,11 @@
   <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-messaging.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script src="./credentials.js"></script>
-  <script src="./toast.js"></script>
-  <script src="./notify.js"></script>
-  <script src="./ui.js"></script>
+  <script src="./scripts/credentials.js"></script>
+  <script src="./scripts/toast.js"></script>
+  <script src="./scripts/notify.js"></script>
+  <script src="./scripts/ui.js"></script>
+  <script src="./scripts/auth.js"></script>
 </body>
 </html>
 <script> </script>
